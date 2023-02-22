@@ -1,21 +1,30 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  email:string; //Captura de email
-  password:string;  //Captura de password
+  email: string;
+  password: string;
 
-  constructor() { //Inicializar los dos atributos
+  constructor(private _login: LoginService, private router: Router) {
     this.email = '';
-    this.password = ''
+    this.password = '';
   }
 
-  login() {  //Función para evento clic
-    console.log('Email: ' + this.email);
-    console.log('Password: ' + this.password);
+  login() {
+    console.log(this.email);
+    console.log(this.password);
+    const user = {
+      email: this.email,
+      password: this.password,
+    };
+    this._login.loginUser(user).subscribe((data) => {
+      console.log(data);
+    });
   }
 }

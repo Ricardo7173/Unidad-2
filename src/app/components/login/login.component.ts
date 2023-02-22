@@ -23,8 +23,8 @@ export class LoginComponent {
       email: this.email,
       password: this.password,
     };
-    this._login.loginUser(user).subscribe((data) => {
-      console.log(data);
+    this._login.loginUser(user).subscribe((data: any) => {
+      alert(data.token);
     });
   }
 }
